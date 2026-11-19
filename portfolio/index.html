@@ -117,12 +117,12 @@
 
     <script>
         // Every chart on this page, in one list. Pair each <figure> id with a Vega-Lite spec.
-        // A spec can be a URL or a path to a .json file in the repo (relative to this page, e.g. "../charts/cc1_chart1.json").
+        // A spec can be a URL or a path to a .json file in the repo (relative to this page, e.g. "charts/cc1_bunds.json").
         // Entries with spec: null keep their dashed placeholder until you fill them in.
         const charts = [
             { id: "#cc1_chart1",  spec: null },
             { id: "#cc1_chart2",  spec: null },
-            { id: "#cc2_chart1",  spec: null },
+            { id: "#cc2_chart1",  spec: "cc2_chart1.json" },
             { id: "#cc2_chart2",  spec: null },
             { id: "#cc3_chart1",  spec: null },
             { id: "#cc3_chart2",  spec: null },
