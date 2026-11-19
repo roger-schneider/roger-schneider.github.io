@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!-- PORTFOLIO PAGE (20% of the grade): the coding challenges. -->
+<!-- Lives at https://roger-schneider.github.io/portfolio/ -->
+<!-- Course rule: clearly label each challenge with a heading. -->
+<!-- Because this file is inside the "portfolio" folder, links to files in the repo root start with "../" -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coding Challenges | Roger Schneider</title>
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Vega-Lite libraries for the charts -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
+</head>
+
+<body>
+    <nav class="site-nav">
+        <div class="inner">
+            <span class="name">Roger Schneider</span>
+            <span class="links">
+                <a href="../project.html">Project</a>
+                <a href="./" class="active">Coding challenges</a>
+            </span>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Coding Challenges</h1>
+        <p class="byline">PP434 portfolio | Roger Schneider</p>
+
+        <div class="cta">
+            <a class="button secondary" href="../project.html">&larr; Back to my project</a>
+        </div>
+
+        <!-- Table of contents: jump links to each challenge -->
+        <nav class="toc">
+            <ol>
+                <li><a href="#cc1">CC1. Hosting</a></li>
+                <li><a href="#cc2">CC2. Building</a></li>
+                <li><a href="#cc3">CC3. Policy debate</a></li>
+                <li><a href="#cc4">CC4. Replication</a></li>
+                <li><a href="#cc5">CC5. Accessing data: API and scraper</a></li>
+                <li><a href="#cc6">CC6. Loops: UK devolution dashboard</a></li>
+                <li><a href="#cc7">CC7. Maps</a></li>
+            </ol>
+        </nav>
+
+        <!-- CC1: two charts you found, embedded with vegaEmbed (remove class examples) -->
+        <section id="cc1">
+            <h2>CC1. Hosting: display charts in my own site</h2>
+            <figure id="cc1_chart1"><div class="placeholder">CC1 chart 1</div></figure>
+            <figure id="cc1_chart2"><div class="placeholder">CC1 chart 2</div></figure>
+        </section>
+
+        <!-- CC2: two of your own charts (e.g. from the Economics Observatory Data Hub), saved as .json in the repo -->
+        <section id="cc2">
+            <h2>CC2. Building: my own visualisations</h2>
+            <figure id="cc2_chart1"><div class="placeholder">CC2 chart 1</div></figure>
+            <figure id="cc2_chart2"><div class="placeholder">CC2 chart 2</div></figure>
+        </section>
+
+        <!-- CC3: policy topic (max 25 words), two charts, commentary near the charts (max 25 words) -->
+        <section id="cc3">
+            <h2>CC3. Policy debate</h2>
+            <p><!-- Policy topic, max 25 words --></p>
+            <figure id="cc3_chart1"><div class="placeholder">CC3 chart 1</div></figure>
+            <figure id="cc3_chart2"><div class="placeholder">CC3 chart 2</div></figure>
+            <p><!-- Commentary, max 25 words --></p>
+        </section>
+
+        <!-- CC4: image of original chart, replication, improvement + explanation (max 25 words) -->
+        <section id="cc4">
+            <h2>CC4. Replication: re-create, then improve, someone else's chart</h2>
+            <h3>Original</h3>
+            <!-- <img src="images/cc4_original.png" alt="Original chart from ..."> -->
+            <div class="placeholder">Image of the original chart</div>
+            <h3>Replication</h3>
+            <figure id="cc4_chart1"><div class="placeholder">CC4 replication</div></figure>
+            <h3>Improvement</h3>
+            <figure id="cc4_chart2"><div class="placeholder">CC4 improved version</div></figure>
+            <p><!-- What you changed, max 25 words --></p>
+        </section>
+
+        <!-- CC5: live API chart + functional description; scraper chart + Colab link + comment (max 25 words) -->
+        <section id="cc5">
+            <h2>CC5. Accessing data: (1) API, (2) Scraper</h2>
+            <h3>API</h3>
+            <figure id="cc5_api"><div class="placeholder">CC5 API chart</div></figure>
+            <p><!-- Base URL, elements needed to call the data, what is returned, full final URL --></p>
+            <h3>Scraper</h3>
+            <figure id="cc5_scraper"><div class="placeholder">CC5 scraper chart</div></figure>
+            <p><!-- Link to public Colab notebook + comment, max 25 words --></p>
+        </section>
+
+        <!-- CC6: lives on its own page, DevolutionDashboard.html (in the repo root) -->
+        <section id="cc6">
+            <h2>CC6. Loops: UK devolution dashboard</h2>
+            <p><a class="button secondary" href="../DevolutionDashboard.html">Open the dashboard &rarr;</a></p>
+        </section>
+
+        <!-- CC7: one coordinates map + one choropleth -->
+        <section id="cc7">
+            <h2>CC7. Maps: base maps and choropleths</h2>
+            <h3>Coordinates map</h3>
+            <figure id="cc7_map1"><div class="placeholder">CC7 coordinates map</div></figure>
+            <h3>Choropleth</h3>
+            <figure id="cc7_map2"><div class="placeholder">CC7 choropleth</div></figure>
+        </section>
+
+        <footer>
+            <a href="../project.html">&larr; Back to my project</a>
+        </footer>
+    </main>
+
+    <script>
+        // Every chart on this page, in one list. Pair each <figure> id with a Vega-Lite spec.
+        // A spec can be a URL or a path to a .json file in the repo (relative to this page, e.g. "../charts/cc1_chart1.json").
+        // Entries with spec: null keep their dashed placeholder until you fill them in.
+        const charts = [
+            { id: "#cc1_chart1",  spec: null },
+            { id: "#cc1_chart2",  spec: null },
+            { id: "#cc2_chart1",  spec: null },
+            { id: "#cc2_chart2",  spec: null },
+            { id: "#cc3_chart1",  spec: null },
+            { id: "#cc3_chart2",  spec: null },
+            { id: "#cc4_chart1",  spec: null },
+            { id: "#cc4_chart2",  spec: null },
+            { id: "#cc5_api",     spec: null },
+            { id: "#cc5_scraper", spec: null },
+            { id: "#cc7_map1",    spec: null },
+            { id: "#cc7_map2",    spec: null },
+        ];
+
+        for (const chart of charts) {
+            if (chart.spec) {
+                vegaEmbed(chart.id, chart.spec);
+            }
+        }
+    </script>
+</body>
+</html>

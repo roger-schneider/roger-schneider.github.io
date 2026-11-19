@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- PROJECT PAGE (80% of the grade) -->
+<!-- Course rules: 5-8 charts/visualisations, max 800 words of text, covering Aims, Data, Tools, Conclusions. -->
+<!-- This is the first page visitors see: index.html redirects here. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project | Roger Schneider</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vega-Lite libraries for the charts -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
+</head>
+
+<body>
+    <nav class="site-nav">
+        <div class="inner">
+            <span class="name">Roger Schneider</span>
+            <span class="links">
+                <a href="project.html" class="active">Project</a>
+                <a href="portfolio/">Coding challenges</a>
+            </span>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Project title</h1>
+        <p class="byline">
+            Roger Schneider | PP434 Automated Data Visualisation for Policymaking |
+            <a href="https://www.linkedin.com/in/roger-s-7a3066221/">LinkedIn</a> |
+            <a href="https://github.com/roger-schneider">GitHub</a> |
+            <a href="https://github.com/roger-schneider/roger-schneider.github.io">Repository</a>
+        </p>
+
+        <!-- Button to the coding challenges page -->
+        <div class="cta">
+            <a class="button" href="portfolio/">View my coding challenges &rarr;</a>
+        </div>
+
+        <section id="aims">
+            <h2>1. Aims</h2>
+            <p><!-- The goal of your project --></p>
+        </section>
+
+        <section id="data">
+            <h2>2. Data</h2>
+            <p><!-- Sources, how you accessed them, notes on automation / replication --></p>
+        </section>
+
+        <section id="tools">
+            <h2>3. Tools</h2>
+            <p><!-- Data cleaning / analysis approach, tools used, challenges and how you overcame them --></p>
+        </section>
+
+        <!-- Charts: add one <figure> per chart (5-8 in total), placed wherever they fit the text. -->
+        <!-- The id must match an entry in the "charts" list in the script at the bottom. -->
+        <section id="results">
+            <h2>Results</h2>
+            <figure id="chart1"><div class="placeholder">Chart 1</div></figure>
+            <figure id="chart2"><div class="placeholder">Chart 2</div></figure>
+        </section>
+
+        <section id="conclusions">
+            <h2>4. Conclusions</h2>
+            <p><!-- What you take from all of this --></p>
+        </section>
+
+        <footer>
+            Data and code: <a href="https://github.com/roger-schneider/roger-schneider.github.io">github.com/roger-schneider/roger-schneider.github.io</a>
+        </footer>
+    </main>
+
+    <script>
+        // List of charts: each entry pairs a <figure> id with a Vega-Lite spec (a .json file in the repo or a URL).
+        // Fill in "spec" when a chart is ready; entries with spec: null keep their placeholder.
+        const charts = [
+            { id: "#chart1", spec: null },   // e.g. "charts/project/chart1.json"
+            { id: "#chart2", spec: null },
+        ];
+
+        for (const chart of charts) {
+            if (chart.spec) {
+                vegaEmbed(chart.id, chart.spec, { actions: false });
+            }
+        }
+    </script>
+</body>
+</html>
