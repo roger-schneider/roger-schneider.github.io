@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "As temperatures drop, Germany's gas storage levels are at historic low",
+    "anchor": "start",
+    "subtitle": "Natural Gas Storage Levels Over the Course of the Year in Germany, % | Source: Bundesnetzagentur",
+    "fontSize": "14",
+    "subtitleFontSize": "12",
+    "color": "#000000",
+    "subtitleColor": "#000000"
+  },
+  "height": "250",
+  "width": "container",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "#ffffff",
+  "view": {
+    "fill": "#ffffff",
+    "strokeOpacity": 0
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/cc3_ger_gas_storage.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "mark": {
+    "type": "line",
+    "color": "#0167a7",
+    "strokeWidth": "2"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "axis": {
+        "title": "",
+        "titleColor": "#122B39",
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "gas_storage_pct",
+      "type": "quantitative",
+      "axis": {
+        "title": "",
+        "titleColor": "#122B39",
+        "grid": false
+      }
+    }
+  }
+}
