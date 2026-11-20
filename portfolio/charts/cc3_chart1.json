@@ -1,54 +1,92 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
-    "text": "As temperatures drop, Germany's gas storage levels are at historic low",
+    "text": "As temperatures drop, Germany's gas storage levels are unusually low",
     "anchor": "start",
-    "subtitle": "Natural Gas Storage Levels Over the Course of the Year in Germany, % | Source: Bundesnetzagentur",
-    "fontSize": "14",
-    "subtitleFontSize": "12",
+    "subtitle": "Natural Gas Storage Levels Over the Course of the Year in Germany, %",
+    "fontSize": 14,
+    "subtitleFontSize": 12,
     "color": "#000000",
     "subtitleColor": "#000000"
   },
-  "height": "250",
+  "height": 300,
   "width": "container",
-  "autosize": {
-    "type": "fit",
-    "contains": "padding"
-  },
+  "autosize": {"type": "fit", "contains": "padding"},
   "background": "#ffffff",
-  "view": {
-    "fill": "#ffffff",
-    "strokeOpacity": 0
-  },
-  "data": {
-    "url": "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/cc3_ger_gas_storage.csv",
-    "format": {
-      "type": "csv"
-    }
-  },
-  "mark": {
-    "type": "line",
-    "color": "#0167a7",
-    "strokeWidth": "2"
-  },
+  "view": {"fill": "#ffffff", "strokeOpacity": 0},
   "encoding": {
     "x": {
       "field": "date",
       "type": "temporal",
+      "timeUnit": "utcyearmonth",
+      "bandPosition": 0.5,
+      "scale": {"domain": [{"year": 2025, "month": 4, "date": 1, "utc": true}, {"year": 2026, "month": 12, "date": 1, "utc": true}]},
       "axis": {
-        "title": "",
-        "titleColor": "#122B39",
-        "grid": false
-      }
-    },
-    "y": {
-      "field": "gas_storage_pct",
-      "type": "quantitative",
-      "axis": {
-        "title": "",
-        "titleColor": "#122B39",
-        "grid": false
+        "title": "Source: Bundesnetzagentur",
+        "titleAnchor": "start",
+        "titleFontWeight": "normal",
+        "titleFontSize": 10,
+        "titleColor": "#555555",
+        "titlePadding": 10,
+        "grid": false,
+        "labelExpr": "utcFormat(datum.value, '%b %Y')",
+        "tickCount": {"interval": "month", "step": 2},
+        "labelAngle": -45
       }
     }
-  }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/cc3_ger_gas_storage.csv",
+        "format": {"type": "csv"}
+      },
+      "mark": {"type": "line", "color": "#0e796c", "strokeWidth": 1, "point": {"color": "#0e796c"}},
+      "encoding": {
+        "y": {
+          "aggregate": "mean",
+          "field": "gas_storage_pct",
+          "type": "quantitative",
+          "axis": {
+            "title": "Gas storage, monthly average (%)",
+            "titleColor": "#0e796c",
+            "orient": "left",
+            "grid": false
+          }
+        },
+        "tooltip": [
+          {"field": "date", "type": "temporal", "timeUnit": "utcyearmonth", "title": "Month"},
+          {"aggregate": "mean", "field": "gas_storage_pct", "type": "quantitative", "title": "Gas storage (%)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/cc3_ger_temp.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {"filter": "time(datum.date) >= utc(2025, 3, 1)"}
+      ],
+      "mark": {"type": "line", "color": "#cdbfb3", "strokeWidth": 1, "opacity": 0.8, "point": {"color": "#cdbfb3", "opacity": 0.8}},
+      "encoding": {
+        "y": {
+          "aggregate": "mean",
+          "field": "temp_c",
+          "type": "quantitative",
+          "axis": {
+            "title": "Monthly avg. temperature (°C)",
+            "titleColor": "#cdbfb3",
+            "orient": "right",
+            "grid": false
+          }
+        },
+        "tooltip": [
+          {"field": "date", "type": "temporal", "timeUnit": "utcyearmonth", "title": "Month"},
+          {"aggregate": "mean", "field": "temp_c", "type": "quantitative", "title": "Temperature (°C)", "format": ".1f"}
+        ]
+      }
+    }
+  ],
+  "resolve": {"scale": {"y": "independent"}}
 }
