@@ -21,7 +21,7 @@
       "name": "days",
       "value": 7,
       "bind": {
-        "input": "radio",
+        "input": "select",
         "options": [
           7,
           14,
@@ -32,7 +32,7 @@
           "Last 14 days",
           "Last month (max. available)"
         ],
-        "name": "Time range: "
+        "name": " "
       }
     }
   ],
@@ -66,7 +66,7 @@
       "scale": {
         "domain": [
           "Kaub",
-          "Köln",
+          "Cologne",
           "Düsseldorf",
           "Duisburg-Ruhrort"
         ],
@@ -77,10 +77,7 @@
           "#e9a03b"
         ]
       },
-      "legend": {
-        "orient": "top",
-        "direction": "horizontal"
-      }
+      "legend": null
     },
     "tooltip": [
       {
@@ -118,10 +115,48 @@
           "filter": "time(datum.timestamp) >= now() - days * 24 * 60 * 60 * 1000"
         }
       ],
-      "mark": {
-        "type": "line",
-        "strokeWidth": 1.5
-      }
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "time(datum.timestamp)",
+              "as": "t"
+            },
+            {
+              "joinaggregate": [
+                {
+                  "op": "max",
+                  "field": "t",
+                  "as": "t_last"
+                }
+              ]
+            },
+            {
+              "filter": "datum.t === datum.t_last"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 6,
+            "fontSize": 11,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {
+              "field": "station",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
     },
     {
       "data": {
@@ -132,17 +167,55 @@
       },
       "transform": [
         {
-          "calculate": "'Köln'",
+          "calculate": "'Cologne'",
           "as": "station"
         },
         {
           "filter": "time(datum.timestamp) >= now() - days * 24 * 60 * 60 * 1000"
         }
       ],
-      "mark": {
-        "type": "line",
-        "strokeWidth": 1.5
-      }
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "time(datum.timestamp)",
+              "as": "t"
+            },
+            {
+              "joinaggregate": [
+                {
+                  "op": "max",
+                  "field": "t",
+                  "as": "t_last"
+                }
+              ]
+            },
+            {
+              "filter": "datum.t === datum.t_last"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 6,
+            "fontSize": 11,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {
+              "field": "station",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
     },
     {
       "data": {
@@ -160,10 +233,48 @@
           "filter": "time(datum.timestamp) >= now() - days * 24 * 60 * 60 * 1000"
         }
       ],
-      "mark": {
-        "type": "line",
-        "strokeWidth": 1.5
-      }
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "time(datum.timestamp)",
+              "as": "t"
+            },
+            {
+              "joinaggregate": [
+                {
+                  "op": "max",
+                  "field": "t",
+                  "as": "t_last"
+                }
+              ]
+            },
+            {
+              "filter": "datum.t === datum.t_last"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 6,
+            "fontSize": 11,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {
+              "field": "station",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
     },
     {
       "data": {
@@ -181,10 +292,52 @@
           "filter": "time(datum.timestamp) >= now() - days * 24 * 60 * 60 * 1000"
         }
       ],
-      "mark": {
-        "type": "line",
-        "strokeWidth": 1.5
-      }
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "time(datum.timestamp)",
+              "as": "t"
+            },
+            {
+              "joinaggregate": [
+                {
+                  "op": "max",
+                  "field": "t",
+                  "as": "t_last"
+                }
+              ]
+            },
+            {
+              "filter": "datum.t === datum.t_last"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 6,
+            "fontSize": 11,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {
+              "field": "station",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  }
 }
