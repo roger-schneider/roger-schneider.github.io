@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "CC5 API chart: the 100 most recent 'Kleine Anfragen' (written questions to the federal government) in the 21st Bundestag, counted by the parliamentary group that submitted them. Data loaded live from the DIP API of the German Bundestag.",
+  "title": {
+    "text": "Who asks the government written questions?",
+    "subtitle": "Number of the 100 most recent 'Kleine Anfragen' by parliamentary group, 21st Bundestag",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 12,
+    "color": "#000000",
+    "subtitleColor": "#555555"
+  },
+  "width": "container",
+  "height": 200,
+  "background": "#ffffff",
+  "view": {"stroke": null},
+  "encoding": {
+    "y": {
+      "field": "party",
+      "type": "nominal",
+      "scale": {"domain": ["AfD", "DIE LINKE", "BÜNDNIS 90/DIE GRÜNEN", "CDU/CSU", "SPD"]},
+      "axis": {"title": null, "ticks": false, "domain": false, "labelFontSize": 12, "labelLimit": 200}
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://search.dip.bundestag.de/api/v1/vorgang?f.vorgangstyp=Kleine%20Anfrage&f.wahlperiode=21&format=json&apikey=R2BZaee.DjdCyihKZMf8AOjtScubP2EVydegzjmBIQ",
+        "format": {"type": "json", "property": "documents"}
+      },
+      "transform": [
+        {"flatten": ["initiative"]},
+        {"calculate": "replace(replace(datum.initiative, 'Fraktion der ', ''), 'Fraktion ', '')", "as": "party"},
+        {"aggregate": [{"op": "count", "as": "questions"}], "groupby": ["party"]}
+      ],
+      "encoding": {
+        "x": {
+          "field": "questions",
+          "type": "quantitative",
+          "axis": {
+            "title": "Source: DIP API, Deutscher Bundestag (live data)",
+            "titleAnchor": "start",
+            "titleFontWeight": "normal",
+            "titleFontSize": 10,
+            "titleColor": "#555555",
+            "grid": true,
+            "gridColor": "#eeeeee",
+            "domain": false,
+            "ticks": false
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "bar", "height": {"band": 0.7}},
+          "encoding": {
+            "color": {
+              "field": "party",
+              "type": "nominal",
+              "scale": {
+                "domain": ["AfD", "DIE LINKE", "BÜNDNIS 90/DIE GRÜNEN", "CDU/CSU", "SPD"],
+                "range": ["#009ee0", "#be3075", "#46962b", "#000000", "#e3000f"]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "party", "type": "nominal", "title": "Parliamentary group"},
+              {"field": "questions", "type": "quantitative", "title": "Kleine Anfragen"}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": "bold"},
+          "encoding": {"text": {"field": "questions", "type": "quantitative"}}
+        }
+      ]
+    },
+    {
+      "description": "Governing parties: no bar, marked with 0 so the empty rows are not mistaken for missing data",
+      "data": {"values": [{"party": "CDU/CSU"}, {"party": "SPD"}]},
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": "bold", "color": "#555555"},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative"},
+        "text": {"value": "0"}
+      }
+    }
+  ]
+}
