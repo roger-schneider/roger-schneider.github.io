@@ -20,11 +20,15 @@
   "background": "#ffffff",
   "view": {"stroke": null},
   "data": {
-    "values": [
-      {"party": "REFORM UK", "share": 35, "colour": "#33bbd9"},
-      {"party": "LABOUR", "share": 20, "colour": "#e4003b"}
-    ]
+    "url": "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/cc4_farage.csv",
+    "format": {"type": "csv"}
   },
+  "transform": [
+    {"filter": "datum.name !== 'Other'"},
+    {"calculate": "upper(datum.name)", "as": "party"},
+    {"calculate": "round(datum.poll * 100)", "as": "share"},
+    {"calculate": "datum.name === 'Reform UK' ? '#33bbd9' : datum.name === 'Labour' ? '#e4003b' : '#b5b5b5'", "as": "colour"}
+  ],
   "encoding": {
     "x": {
       "field": "party",
