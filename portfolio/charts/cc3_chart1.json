@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
-    "text": "As temperatures drop, Germany's gas storage levels are unusually low",
+    "text": "As temperatures drop, national gas storage levels are unusually low...",
     "anchor": "start",
     "subtitle": "Natural Gas Storage Levels Over the Course of the Year in Germany, %",
     "fontSize": 14,

@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
-    "text": "EU gas prices keep rising, making Germany's last-minute purchases painfully expensive",
+    "text": "...and Germany's last-minute purchases are becoming painfully expensive as EU gas prices soar",
     "anchor": "start",
     "subtitle": "Monthly, US$ per million BTU",
     "fontSize": 14,

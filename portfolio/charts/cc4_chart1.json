@@ -1,0 +1,89 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "CC4 replication of Reform UK's 'Britain wants Reform' chart (BMG Research, 26-28 August 2025). Data traced from the original image.",
+  "title": {
+    "text": "BRITAIN WANTS REFORM",
+    "subtitle": "Reform UK hits 35% for the first time",
+    "anchor": "middle",
+    "font": "Helvetica Neue, Helvetica, Arial, sans-serif",
+    "fontSize": 26,
+    "fontWeight": 900,
+    "color": "#1d1d1b",
+    "subtitleFont": "Helvetica Neue, Helvetica, Arial, sans-serif",
+    "subtitleFontSize": 20,
+    "subtitleColor": "#1d1d1b",
+    "subtitlePadding": 6,
+    "offset": 20
+  },
+  "width": 300,
+  "height": 380,
+  "background": "#ffffff",
+  "view": {"stroke": null},
+  "data": {
+    "values": [
+      {"party": "REFORM UK", "share": 35, "colour": "#33bbd9"},
+      {"party": "LABOUR", "share": 20, "colour": "#e4003b"}
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "party",
+      "type": "nominal",
+      "sort": null,
+      "axis": {
+        "title": "BMG Research, 26-28 August 2025",
+        "titleFontWeight": "normal",
+        "titleFontSize": 12,
+        "titleColor": "#1d1d1b",
+        "titlePadding": 14,
+        "labels": false,
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "y": {
+      "field": "share",
+      "type": "quantitative",
+      "scale": {"domain": [12, 41], "zero": false},
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadius": 8, "width": {"band": 0.88}},
+      "encoding": {
+        "y2": {"datum": 12},
+        "color": {"field": "colour", "type": "nominal", "scale": null}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline": "bottom",
+        "dy": -8,
+        "fontSize": 44,
+        "fontWeight": 900,
+        "font": "Helvetica Neue, Helvetica, Arial, sans-serif"
+      },
+      "encoding": {
+        "text": {"field": "label", "type": "nominal"},
+        "color": {"field": "colour", "type": "nominal", "scale": null}
+      },
+      "transform": [{"calculate": "datum.share + '%'", "as": "label"}]
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline": "top",
+        "dy": 24,
+        "fontSize": 15,
+        "fontWeight": 900,
+        "color": "#ffffff",
+        "font": "Helvetica Neue, Helvetica, Arial, sans-serif"
+      },
+      "encoding": {
+        "text": {"field": "party", "type": "nominal"}
+      }
+    }
+  ]
+}

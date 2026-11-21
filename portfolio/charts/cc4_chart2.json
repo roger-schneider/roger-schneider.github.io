@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "CC4 improved version: same BMG Research poll (26-28 August 2025), bars start at zero, all vote shares shown. 'All other parties' = 100% minus Reform UK and Labour.",
+  "title": {
+    "text": "Westminster voting intention, BMG Research",
+    "subtitle": "% of respondents, fieldwork 26-28 August 2025. All other parties = 100% minus Reform UK and Labour",
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "color": "#1d1d1b",
+    "subtitleColor": "#555555"
+  },
+  "width": 400,
+  "height": 150,
+  "background": "#ffffff",
+  "view": {"stroke": null},
+  "data": {
+    "values": [
+      {"party": "Reform UK", "share": 35, "colour": "#33bbd9"},
+      {"party": "Labour", "share": 20, "colour": "#e4003b"},
+      {"party": "All other parties", "share": 45, "colour": "#b5b5b5"}
+    ]
+  },
+  "transform": [{"calculate": "datum.share + '%'", "as": "label"}],
+  "encoding": {
+    "y": {
+      "field": "party",
+      "type": "nominal",
+      "sort": null,
+      "axis": {"title": null, "ticks": false, "domain": false, "labelFontSize": 12, "labelPadding": 8, "labelLimit": 250}
+    },
+    "x": {
+      "field": "share",
+      "type": "quantitative",
+      "scale": {"domain": [0, 50]},
+      "axis": {
+        "title": "Source: BMG Research, 26-28 August 2025; chart originally shared by Reform UK",
+        "titleAnchor": "start",
+        "titleFontWeight": "normal",
+        "titleFontSize": 10,
+        "titleColor": "#555555",
+        "titlePadding": 10,
+        "labelExpr": "datum.value + '%'",
+        "tickCount": 5,
+        "grid": true,
+        "gridColor": "#eeeeee",
+        "domain": false,
+        "ticks": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "height": {"band": 0.7}},
+      "encoding": {
+        "color": {"field": "colour", "type": "nominal", "scale": null},
+        "tooltip": [
+          {"field": "party", "type": "nominal", "title": "Party"},
+          {"field": "label", "type": "nominal", "title": "Vote share"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": "bold", "color": "#1d1d1b"},
+      "encoding": {"text": {"field": "label", "type": "nominal"}}
+    }
+  ]
+}
