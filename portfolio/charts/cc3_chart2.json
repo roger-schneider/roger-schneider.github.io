@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
-    "text": "EU gas prices haved more than doubled compared to last year",
+    "text": "EU gas prices keep rising, making Germany's last-minute purchases painfully expensive",
     "anchor": "start",
     "subtitle": "Monthly, US$ per million BTU",
     "fontSize": 14,
