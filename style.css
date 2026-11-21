@@ -105,6 +105,52 @@ figure {
   width: 100%;
 }
 
+/* Two items next to each other in equal columns (e.g. CC4 original + replication) */
+.side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Stack them on narrow screens (phones) */
+@media (max-width: 600px) {
+  .side-by-side { grid-template-columns: 1fr; }
+}
+
+.side-by-side figure { margin: 0; }
+
+/* Equal-sized frames: 4:5, the proportions of the CC4 original image */
+.frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* Images fill their frame without distortion */
+img.frame { object-fit: contain; }
+
+/* Charts drawn as SVG shrink or grow to fit inside their frame, keeping proportions */
+figure.frame .vega-embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+figure.frame .vega-embed svg {
+  width: 100%;
+  height: 100%;
+}
+
+.original-chart figcaption {
+  font-size: 0.85em;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
 /* Placeholder box shown where a chart will go */
 .placeholder {
   border: 2px dashed var(--border);
