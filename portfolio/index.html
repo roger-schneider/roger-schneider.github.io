@@ -74,21 +74,27 @@
         <!-- CC4: image of original chart, replication, improvement + explanation (max 25 words) -->
         <section id="cc4">
             <h2>CC4. Replication: re-create, then improve, someone else's chart</h2>
-            <h3>Original</h3>
-            <!-- Screenshot of the original chart, saved in portfolio/images/ (CC4 requires an image file) -->
-            <figure class="original-chart">
-                <img src="images/cc4_original.png"
-                     alt="Reform UK bar chart titled 'Britain wants Reform: Reform UK hits 35% for the first time'. A tall light-blue bar labelled 35% for Reform UK next to a shorter red bar labelled 20% for Labour, each with a party leader photo and logo. Source line: BMG Research, 26-28 August 2025.">
-                <figcaption>
-                    Source: <a href="https://x.com/Nigel_Farage/status/1961540577113378922">Nigel Farage on X</a>,
-                    poll data from BMG Research, 26&ndash;28 August 2025.
-                </figcaption>
-            </figure>
-            <h3>Replication</h3>
-            <figure id="cc4_chart1"><div class="placeholder">CC4 replication</div></figure>
+            <div class="side-by-side">
+                <div>
+                    <h3>Original</h3>
+                    <!-- Screenshot of the original chart, saved in portfolio/images/ (CC4 requires an image file) -->
+                    <figure class="original-chart">
+                        <img class="frame" src="images/cc4_original.png"
+                             alt="Reform UK bar chart titled 'Britain wants Reform: Reform UK hits 35% for the first time'. A tall light-blue bar labelled 35% for Reform UK next to a shorter red bar labelled 20% for Labour, each with a party leader photo and logo. Source line: BMG Research, 26-28 August 2025.">
+                        <figcaption>
+                            Source: <a href="https://x.com/Nigel_Farage/status/1961540577113378922">Nigel Farage on X</a>,
+                            poll data from BMG Research, 26&ndash;28 August 2025.
+                        </figcaption>
+                    </figure>
+                </div>
+                <div>
+                    <h3>Replication</h3>
+                    <figure id="cc4_chart1" class="frame"><div class="placeholder">CC4 replication</div></figure>
+                </div>
+            </div>
+            <p>Reform UK shows the polling results disproportionally. I fixed this and decided to plot the bar chart horizontally. Moreover, I decided to include "Others":</p>
             <h3>Improvement</h3>
             <figure id="cc4_chart2"><div class="placeholder">CC4 improved version</div></figure>
-            <p>Reform UK shows the polling results disproportionally. I fixed this and decided to plot the bar chart horizontally. Moreover, I decided to include "Others".</p>
         </section>
 
         <!-- CC5: live API chart + functional description; scraper chart + Colab link + comment (max 25 words) -->
@@ -133,7 +139,7 @@
             { id: "#cc2_chart2",  spec: "charts/cc2_chart2.json" },
             { id: "#cc3_chart1",  spec: "charts/cc3_chart1.json" },
             { id: "#cc3_chart2",  spec: "charts/cc3_chart2.json" },
-            { id: "#cc4_chart1",  spec: "charts/cc4_chart1.json" },
+            { id: "#cc4_chart1",  spec: "charts/cc4_chart1.json", options: { renderer: "svg" } },  // SVG so it can scale to fit its frame
             { id: "#cc4_chart2",  spec: "charts/cc4_chart2.json" },
             { id: "#cc5_api",     spec: null },
             { id: "#cc5_scraper", spec: null },
@@ -143,7 +149,7 @@
 
         for (const chart of charts) {
             if (chart.spec) {
-                vegaEmbed(chart.id, chart.spec);
+                vegaEmbed(chart.id, chart.spec, chart.options);   // options are optional, e.g. { renderer: "svg" }
             }
         }
     </script>
