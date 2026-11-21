@@ -1,3 +1,7 @@
 .DS_Store
+.venv/
+.venv
 dsa*
 project_data
+*.ipynb_checkpoints/
+__pycache__/
