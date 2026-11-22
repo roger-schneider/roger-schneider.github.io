@@ -100,10 +100,19 @@
         <section id="cc5">
             <h2>CC5. Accessing data: (1) API, (2) Scraper</h2>
             <h3>API</h3>
-            <!-- The chart's time-range dropdown is placed here, above the chart (see "bind" option below) -->
             <div id="cc5_api_controls" class="chart-controls"></div>
             <figure id="cc5_api"><div class="placeholder">CC5 API chart</div></figure>
             <p><!-- Base URL, elements needed to call the data, what is returned, full final URL --></p>
+            <p>Base URL: <a href=https://www.pegelonline.wsv.de/webservices/rest-api/v2>Pegel Online</a></p>
+            <p>Elements for API call:
+                <ul>
+                    <li>Gauge station (e.g. KAUB)</li>
+                    <li>Time series (/W/)</li>
+                    <li>Format: measurement.json</li>
+                    <li>Period: ´?start=P31D´ for last 31 days</li>
+                </ul>
+            </p>
+            <p>API returns a tidy JSON file.</p>
             <h3>Scraper</h3>
             <figure id="cc5_scraper"><div class="placeholder">CC5 scraper chart</div></figure>
             <p><!-- Link to public Colab notebook + comment, max 25 words --></p>
