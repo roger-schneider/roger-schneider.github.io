@@ -102,7 +102,6 @@
             <h3>API</h3>
             <div id="cc5_api_controls" class="chart-controls"></div>
             <figure id="cc5_api"><div class="placeholder">CC5 API chart</div></figure>
-            <p><!-- Base URL, elements needed to call the data, what is returned, full final URL --></p>
             <p>Base URL: <a href=https://www.pegelonline.wsv.de/webservices/rest-api/v2>Pegel Online</a></p>
             <p>Elements for API call:
                 <ul>
@@ -112,10 +111,11 @@
                     <li>Period: ?start=P31D for last 31 days</li>
                 </ul>
             </p>
-            <p>API returns a tidy JSON file.</p>
+            <p>The API returns a tidy JSON file.</p>
             <h3>Scraper</h3>
+            <p>I scraped a wikitable from a Wikipedia page on inland waterway transport in Germany (<a href="https://de.wikipedia.org/wiki/Binnenschifffahrt">Link</a>). The main challenges were transforming the wikitable to long format and dealing with German decimals.</p>
+            <p>Scraping, cleaning and some exploratory analysis was done in this Google Colab <a href="https://colab.research.google.com/drive/10VdSFWmB3NJavmJTqG7daqFD0aKRyYGC?usp=sharing">notebook</a>.</p>
             <figure id="cc5_scraper"><div class="placeholder">CC5 scraper chart</div></figure>
-            <p><!-- Link to public Colab notebook + comment, max 25 words --></p>
         </section>
 
         <!-- CC6: lives on its own page, DevolutionDashboard.html (in the repo root) -->
@@ -152,7 +152,7 @@
             { id: "#cc4_chart1",  spec: "charts/cc4_chart1.json", options: { renderer: "svg" } },  // SVG so it can scale to fit its frame
             { id: "#cc4_chart2",  spec: "charts/cc4_chart2.json" },
             { id: "#cc5_api",     spec: "charts/cc5_api.json", options: { bind: "#cc5_api_controls", actions: false } },  // dropdown goes above the chart
-            { id: "#cc5_scraper", spec: null },
+            { id: "#cc5_scraper", spec: "charts/cc5_scraping.json" },
             { id: "#cc7_map1",    spec: null },
             { id: "#cc7_map2",    spec: null },
         ];
