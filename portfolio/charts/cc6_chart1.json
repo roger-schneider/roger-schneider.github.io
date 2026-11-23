@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "CC6 chart 1: Population, Greater Manchester vs England. Dashed lines: devolution deal (Nov 2014) and first elected mayor (May 2017).",
+  "description": "CC6 chart 1: Population, Greater Manchester vs England. Dashed lines, labelled in this chart only: devolution deal (Nov 2014) and first elected mayor (May 2017).",
   "title": {
     "text": "Population",
     "subtitle": "Index 2014 = 100",
@@ -67,6 +67,62 @@
             "format": "%b %Y"
           }
         ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "date": "2014-11-03",
+            "label": "Devolution deal"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "top",
+        "dx": -4,
+        "y": 4,
+        "fontSize": 9,
+        "lineHeight": 11,
+        "color": "#666666"
+      },
+      "encoding": {
+        "text": {
+          "value": [
+            "Devolution deal",
+            "(Nov 2014)"
+          ]
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "date": "2017-05-04",
+            "label": "First elected mayor"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 4,
+        "y": 4,
+        "fontSize": 9,
+        "lineHeight": 11,
+        "color": "#666666"
+      },
+      "encoding": {
+        "text": {
+          "value": [
+            "First elected",
+            "mayor (May 2017)"
+          ]
+        }
       }
     },
     {
