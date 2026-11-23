@@ -261,3 +261,24 @@ footer {
   font-size: 0.9em;
   color: var(--muted);
 }
+
+/* ---------- CC6 dashboard ---------- */
+/* Wider page so three charts fit next to each other */
+main.wide { max-width: 1200px; }
+
+/* 3 x 2 grid of charts; 2 columns on tablets, 1 on phones */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .dashboard-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+.dashboard-grid figure { margin: 0; }
