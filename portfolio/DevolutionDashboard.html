@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- CC6: Greater Manchester devolution dashboard -->
+<!-- Data: downloaded with a Python loop (portfolio/portfolio.ipynb, CC6) from the ONS Nomis API and saved as JSON in the repo. -->
+<!-- Charts: one chart template, embedded with vegaEmbed inside a single loop. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Devolution Dashboard | Roger Schneider</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
+</head>
+
+<body>
+    <nav class="site-nav">
+        <div class="inner">
+            <span class="name">Roger Schneider</span>
+            <span class="links">
+                <a href="project.html">Project</a>
+                <a href="portfolio/">Coding challenges</a>
+            </span>
+        </div>
+    </nav>
+
+    <main class="wide">
+        <h1>Greater Manchester devolution dashboard</h1>
+        <p class="byline">CC6 | Greater Manchester compared with England</p>
+
+        <div class="cta">
+            <a class="button secondary" href="portfolio/#cc6">&larr; Back to the coding challenges</a>
+        </div>
+
+        <p><!-- Your introduction: the question, the data (ONS Nomis API), the dashed lines --></p>
+        <p><!-- Link to your public Colab notebook with the download loop --></p>
+
+        <!-- 3 x 2 grid of charts; the ids must match the list in the script below -->
+        <div class="dashboard-grid">
+            <figure id="chart1"></figure>
+            <figure id="chart2"></figure>
+            <figure id="chart3"></figure>
+            <figure id="chart4"></figure>
+            <figure id="chart5"></figure>
+            <figure id="chart6"><div class="placeholder">Sixth series to follow</div></figure>
+        </div>
+
+        <footer>
+            Source: ONS, Nomis (Annual Population Survey, Claimant Count, UK Business Counts, Population Estimates).
+            Dashed lines: devolution deal (November 2014) and first elected mayor (May 2017).
+        </footer>
+    </main>
+
+    <script>
+        // The JSON files saved by the notebook, read as "raw" files from GitHub
+        const dataUrl = "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/";
+
+        // One entry per chart
+        const charts = [
+            { id: "#chart1", file: "cc6_employment_rate.json",   title: "Employment rate",   unit: "% of people aged 16-64" },
+            { id: "#chart2", file: "cc6_unemployment_rate.json", title: "Unemployment rate", unit: "% of economically active, 16+" },
+            { id: "#chart3", file: "cc6_claimant_rate.json",     title: "Claimant count",    unit: "% of people aged 16-64" },
+            { id: "#chart4", file: "cc6_businesses.json",        title: "Businesses",        unit: "Number of enterprises, index 2014 = 100" },
+            { id: "#chart5", file: "cc6_population.json",        title: "Population",        unit: "Index 2014 = 100" },
+        ];
+
+        // Devolution milestones, drawn as dashed lines on every chart
+        const milestones = [
+            { date: "2014-11-03", label: "Devolution deal" },
+            { date: "2017-05-04", label: "First elected mayor" },
+        ];
+
+        // Loop: build one chart from the same template and embed it
+        for (const chart of charts) {
+            const spec = {
+                $schema: "https://vega.github.io/schema/vega-lite/v6.json",
+                title: { text: chart.title, subtitle: chart.unit, anchor: "start", fontSize: 13, subtitleFontSize: 11, subtitleColor: "#555555" },
+                width: "container",
+                height: 180,
+                encoding: {
+                    x: { field: "date", type: "temporal", title: null,
+                         scale: { domain: [{ year: 2004 }, { year: 2026, month: 12 }] },
+                         axis: { grid: false, format: "%Y", tickCount: 5 } }
+                },
+                layer: [
+                    {
+                        data: { values: milestones },
+                        mark: { type: "rule", strokeDash: [4, 3], color: "#999999" },
+                        encoding: { tooltip: [{ field: "label" }, { field: "date", type: "temporal", format: "%b %Y" }] }
+                    },
+                    {
+                        data: { url: dataUrl + chart.file },
+                        mark: { type: "line", strokeWidth: 2 },
+                        encoding: {
+                            y: { field: "value", type: "quantitative", title: null, scale: { zero: false },
+                                 axis: { gridColor: "#eeeeee" } },
+                            color: { field: "area", type: "nominal", title: null,
+                                     scale: { domain: ["Greater Manchester", "England"], range: ["#d1495b", "#999999"] },
+                                     legend: { orient: "top", direction: "horizontal" } },
+                            tooltip: [
+                                { field: "area", title: "Area" },
+                                { field: "date", type: "temporal", title: "Date", format: "%b %Y" },
+                                { field: "value", type: "quantitative", title: "Value", format: ".1f" }
+                            ]
+                        }
+                    }
+                ]
+            };
+            vegaEmbed(chart.id, spec, { actions: false });
+        }
+    </script>
+</body>
+</html>
