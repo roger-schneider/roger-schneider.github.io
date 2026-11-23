@@ -1,0 +1,132 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "CC6 chart 6: Self-employment, Greater Manchester vs England. Dashed lines: devolution deal (Nov 2014) and first elected mayor (May 2017).",
+  "title": {
+    "text": "Self-employment",
+    "subtitle": "% of people aged 16-64",
+    "anchor": "start",
+    "fontSize": 13,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#555555"
+  },
+  "width": "container",
+  "height": 180,
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": null,
+      "scale": {
+        "domain": [
+          {
+            "year": 2004
+          },
+          {
+            "year": 2026,
+            "month": 12
+          }
+        ]
+      },
+      "axis": {
+        "grid": false,
+        "format": "%Y",
+        "tickCount": 5
+      }
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "date": "2014-11-03",
+            "label": "Devolution deal"
+          },
+          {
+            "date": "2017-05-04",
+            "label": "First elected mayor"
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          3
+        ],
+        "color": "#999999"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "label"
+          },
+          {
+            "field": "date",
+            "type": "temporal",
+            "format": "%b %Y"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/cc6_self_employment.json"
+      },
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": null,
+          "scale": {
+            "zero": false
+          },
+          "axis": {
+            "gridColor": "#eeeeee"
+          }
+        },
+        "color": {
+          "field": "area",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Greater Manchester",
+              "England"
+            ],
+            "range": [
+              "#d1495b",
+              "#999999"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "area",
+            "title": "Area"
+          },
+          {
+            "field": "date",
+            "type": "temporal",
+            "title": "Date",
+            "format": "%b %Y"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Value",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
+}

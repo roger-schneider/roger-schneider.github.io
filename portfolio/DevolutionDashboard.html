@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- CC6: Greater Manchester devolution dashboard -->
-<!-- Data: downloaded with a Python loop (portfolio/portfolio.ipynb, CC6) from the ONS Nomis API and saved as JSON in the repo. -->
-<!-- Charts: one chart template, embedded with vegaEmbed inside a single loop. -->
+<!-- Data: downloaded with one Python loop (portfolio/portfolio.ipynb, CC6) from the ONS Nomis API and saved as JSON in data/clean/. -->
+<!-- Charts: one Vega-Lite spec per chart in charts/cc6_chart1.json ... cc6_chart6.json, embedded with vegaEmbed inside a single loop. -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -43,71 +43,23 @@
             <figure id="chart3"></figure>
             <figure id="chart4"></figure>
             <figure id="chart5"></figure>
-            <figure id="chart6"><div class="placeholder">Sixth series to follow</div></figure>
+            <figure id="chart6"></figure>
         </div>
 
         <footer>
-            Source: ONS, Nomis (Annual Population Survey, Claimant Count, UK Business Counts, Population Estimates).
+            Source: ONS, Nomis (Population Estimates, Annual Population Survey, UK Business Counts, Annual Survey of Hours and Earnings).
             Dashed lines: devolution deal (November 2014) and first elected mayor (May 2017).
         </footer>
     </main>
 
     <script>
-        // The JSON files saved by the notebook, read as "raw" files from GitHub
-        const dataUrl = "https://raw.githubusercontent.com/roger-schneider/roger-schneider.github.io/refs/heads/main/portfolio/data/clean/";
+        // CC6 point 2: one vegaEmbed call inside a loop, instead of writing it out once per chart.
+        // Chart i goes into <figure id="chart{i}"> and uses the spec charts/cc6_chart{i}.json.
+        // Each spec reads its data (saved by the notebook's download loop) as a raw file from GitHub.
+        const numberOfCharts = 6;
 
-        // One entry per chart
-        const charts = [
-            { id: "#chart1", file: "cc6_employment_rate.json",   title: "Employment rate",   unit: "% of people aged 16-64" },
-            { id: "#chart2", file: "cc6_unemployment_rate.json", title: "Unemployment rate", unit: "% of economically active, 16+" },
-            { id: "#chart3", file: "cc6_claimant_rate.json",     title: "Claimant count",    unit: "% of people aged 16-64" },
-            { id: "#chart4", file: "cc6_businesses.json",        title: "Businesses",        unit: "Number of enterprises, index 2014 = 100" },
-            { id: "#chart5", file: "cc6_population.json",        title: "Population",        unit: "Index 2014 = 100" },
-        ];
-
-        // Devolution milestones, drawn as dashed lines on every chart
-        const milestones = [
-            { date: "2014-11-03", label: "Devolution deal" },
-            { date: "2017-05-04", label: "First elected mayor" },
-        ];
-
-        // Loop: build one chart from the same template and embed it
-        for (const chart of charts) {
-            const spec = {
-                $schema: "https://vega.github.io/schema/vega-lite/v6.json",
-                title: { text: chart.title, subtitle: chart.unit, anchor: "start", fontSize: 13, subtitleFontSize: 11, subtitleColor: "#555555" },
-                width: "container",
-                height: 180,
-                encoding: {
-                    x: { field: "date", type: "temporal", title: null,
-                         scale: { domain: [{ year: 2004 }, { year: 2026, month: 12 }] },
-                         axis: { grid: false, format: "%Y", tickCount: 5 } }
-                },
-                layer: [
-                    {
-                        data: { values: milestones },
-                        mark: { type: "rule", strokeDash: [4, 3], color: "#999999" },
-                        encoding: { tooltip: [{ field: "label" }, { field: "date", type: "temporal", format: "%b %Y" }] }
-                    },
-                    {
-                        data: { url: dataUrl + chart.file },
-                        mark: { type: "line", strokeWidth: 2 },
-                        encoding: {
-                            y: { field: "value", type: "quantitative", title: null, scale: { zero: false },
-                                 axis: { gridColor: "#eeeeee" } },
-                            color: { field: "area", type: "nominal", title: null,
-                                     scale: { domain: ["Greater Manchester", "England"], range: ["#d1495b", "#999999"] },
-                                     legend: { orient: "top", direction: "horizontal" } },
-                            tooltip: [
-                                { field: "area", title: "Area" },
-                                { field: "date", type: "temporal", title: "Date", format: "%b %Y" },
-                                { field: "value", type: "quantitative", title: "Value", format: ".1f" }
-                            ]
-                        }
-                    }
-                ]
-            };
-            vegaEmbed(chart.id, spec, { actions: false });
+        for (let i = 1; i <= numberOfCharts; i++) {
+            vegaEmbed("#chart" + i, "charts/cc6_chart" + i + ".json", { actions: false });
         }
     </script>
 </body>
