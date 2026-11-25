@@ -134,14 +134,24 @@ figure {
 img.frame { object-fit: contain; }
 
 /* Charts drawn as SVG shrink or grow to fit inside their frame, keeping proportions.
-   Note: vegaEmbed adds the class "vega-embed" to the <figure> itself, so these rules
-   target figure.frame directly (vega-embed would otherwise make it inline-block). */
+   vegaEmbed adds the class "vega-embed" to the <figure> itself and puts the chart in a
+   <div class="chart-wrapper"> that is as big as the chart. Pinning that wrapper to the
+   frame's edges stops it from stretching the frame, so the frame keeps its 4:5 shape. */
 figure.frame.vega-embed {
   display: block;
+  position: relative;
+  overflow: hidden;
   padding-right: 0;            /* vega-embed adds 38px for its "..." menu */
 }
 
-figure.frame svg {
+figure.frame .chart-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+figure.frame .chart-wrapper svg {   /* only the chart, not the small "..." menu icon */
   display: block;
   width: 100%;
   height: 100%;
